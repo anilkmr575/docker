@@ -1,0 +1,43 @@
+---Docker basic commands
+#To pull image form git hub to host
+docker pull ubuntu<imagename>
+docker pull centos:centos7
+#List all the images
+docker images
+#List all containers
+docker ps -a or docker ps -l
+#To search Docker image
+docker image search image[image:tag]
+For eg.
+docker image search centos:centos7
+#docker image search centos:centos7
+#To built your image
+#docker build -t imagename:tag
+For eg.
+docker build -t tom:1.0
+
+docker rmi ubuntu<imagename> -- to remove the image
+docker start <imageid> --run the container with the command that was used to create it
+docker ps -l and docker ps -a --to see all the docker run or exited
+docker stop dockerid/auto-name
+**************
+creating a docker file:-
+it contians instruction to builing a docker image.
+instrucions contains various keywords.
+7)From -> indicates the base image from which the container is built
+8)RUN --> This indicates the command that need to be executed on the image
+9)docker buit -t imagename:tag --to build an image
+10) docker run --name "container-name" -p<hostport>:<continerport><imagename:tage>
+11) docker info --provide wide info like taken size kernel version etc
+
+12) docker rm <containername>/id --to remove container
+13) docker rmi <imageid>
+not delete the runing conainer
+first we have to stop the container
+14) docker kill did to kill process
+15) ctrl+p+q to quit form the container withoud terminating it
+
+
+16) docker run -it centos bash
+interactively connect to container shell
+
