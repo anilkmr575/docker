@@ -1,4 +1,6 @@
 ---Docker basic commands
+#mages are downloaded in location 
+/var/lib/docker/devicemapper/devicemapper/data
 #To pull image form git hub to host
 docker pull ubuntu<imagename>
 docker pull centos:centos7
@@ -11,33 +13,60 @@ docker image search image[image:tag]
 For eg.
 docker image search centos:centos7
 #docker image search centos:centos7
+#To check wide info about docker like size, kernel etc
+docker info
 #To built your image
 #docker build -t imagename:tag
 For eg.
 docker build -t tom:1.0
+#To run docker container
+docker run imagename:tag/imageid
+#to run docker container by manual dockername and newly created image
+docker run --name "centostomcat" -p 8080:8080 tom:1.0
 
-docker rmi ubuntu<imagename> -- to remove the image
-docker start <imageid> --run the container with the command that was used to create it
-docker ps -l and docker ps -a --to see all the docker run or exited
+# To  Run an Interactive Session into a Container
+docker run -it imagename bash
+for eg.
+docker run -it centos7 bash
+#To exit form the container shell
+exit
+#To exit from the container to host without exiting the conainer shell
+ctrl+p or ctrl+q
+#To reconnect to the running container from the host machine
+docker attach container-id
+#To run the container with the command that was used to create it
+docker start <imageid>
+#To stop the running contianer
 docker stop dockerid/auto-name
+#To remove the docker image
+docker rmi <imagename>/<imageid>
+#To remove the docer container
+docker rm containername/id  --we can not delete the running docker container first stop it
+#To stop a running container from the host session issue the following command
+docker kill <container id>
+
 **************
 creating a docker file:-
 it contians instruction to builing a docker image.
-instrucions contains various keywords.
-7)From -> indicates the base image from which the container is built
-8)RUN --> This indicates the command that need to be executed on the image
-9)docker buit -t imagename:tag --to build an image
-10) docker run --name "container-name" -p<hostport>:<continerport><imagename:tage>
-11) docker info --provide wide info like taken size kernel version etc
+#instrucions contains various keywords.
+From -> indicates the base image from which the container is built
+RUN --> This indicates the command that need to be executed on the image
+************************ 
+#######Docker Netwrok#########
 
-12) docker rm <containername>/id --to remove container
-13) docker rmi <imageid>
-not delete the runing conainer
-first we have to stop the container
-14) docker kill did to kill process
-15) ctrl+p+q to quit form the container withoud terminating it
+#To see default docker network 
+docker network ls
+#To see details of particular network type and to know the ip's of container
+docker network inspect bridge
+brclt to check in hostos
+#Adding manual subnet to docker
+#docker network create --subnet=192.168.1.0/16 --gateway=192.168.1.1  mynet
 
+#Running Docker with specific cpu,cpu-core, ram ,network,volume,port,memory
+docker run --net mynet --ip 192.168.1.5 -p 5000:80 -v /mnt:/var/www/html -m 500m --cpuset-cpus=0 -c 500 -it --name apache centos /bin/bash
+#To check how much RAM docker container is using
+docker stats -a centos7 --no-stream
+#To verify container IP Address
+docker network inspect b04159ce3a96<containerid
 
-16) docker run -it centos bash
-interactively connect to container shell
 
