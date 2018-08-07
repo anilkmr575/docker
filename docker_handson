@@ -51,6 +51,8 @@ it contians instruction to builing a docker image.
 #instrucions contains various keywords.
 From -> indicates the base image from which the container is built
 RUN --> This indicates the command that need to be executed on the image
+ENV --> This set the Envirenmet
+EXPOSE --> to set the container port
 ************************ 
 #######Docker Netwrok#########
 
